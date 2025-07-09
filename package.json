@@ -1,0 +1,14 @@
+{
+  "name": "nowyouknow-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "cd cdn && npm ci && npm run build",
+    "start": "cd cdn && npm start",
+    "develop": "cd cdn && npm run develop"
+  },
+  "engines": {
+    "node": ">=18.0.0 <=22.x.x",
+    "npm": ">=6.0.0"
+  }
+}
