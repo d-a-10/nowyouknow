@@ -6,7 +6,7 @@
   "scripts": {
     "develop": "strapi develop",
     "start": "strapi start",
-    "build": "NODE_OPTIONS=--max-old-space-size=4096 strapi build --no-optimization",
+    "build": "NODE_OPTIONS=--max-old-space-size=4096 strapi build",
     "build:production": "cross-env NODE_ENV=production npm run build",
     "strapi": "strapi"
   },

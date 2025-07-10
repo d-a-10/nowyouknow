@@ -20,8 +20,13 @@ COPY . .
 # Set environment variables
 ENV NODE_ENV=production
 ENV STRAPI_TELEMETRY_DISABLED=true
+ENV STRAPI_DISABLE_UPDATE_NOTIFICATION=true
+ENV NODE_OPTIONS=--max-old-space-size=4096
 
-# Build the application with optimization disabled
+# Rebuild native modules for current architecture
+RUN npm rebuild @swc/core --verbose
+
+# Build the application 
 RUN npm run build:production
 
 # Expose port
