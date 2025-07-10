@@ -2,13 +2,17 @@
 node = "18.20.8"
 
 [phases.setup]
-nixPkgs = ["nodejs", "npm", "python3", "gcc", "gnumake", "pkg-config"]
+nixPkgs = ["nodejs", "npm", "python3", "gcc", "gnumake", "pkg-config", "libc"]
 
 [phases.install]
-cmd = "cd cdn && npm ci --omit=dev"
+cmd = "cd cdn && npm ci --omit=dev --ignore-scripts && npm rebuild"
 
 [phases.build]
 cmd = "cd cdn && npm run build"
 
 [start]
 cmd = "cd cdn && npm start"
+
+[variables]
+NODE_ENV = "production"
+STRAPI_TELEMETRY_DISABLED = "true"
