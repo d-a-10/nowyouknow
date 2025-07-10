@@ -1,11 +1,11 @@
 {
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
-    "builder": "DOCKERFILE",
-    "dockerfilePath": "cdn/Dockerfile"
+    "builder": "NIXPACKS",
+    "buildCommand": "cd cdn && npm ci --omit=dev && npm run build"
   },
   "deploy": {
-    "startCommand": "npm start",
+    "startCommand": "cd cdn && npm start",
     "healthcheckPath": "/api",
     "healthcheckTimeout": 300,
     "restartPolicyType": "ON_FAILURE",

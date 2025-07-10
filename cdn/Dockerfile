@@ -13,25 +13,20 @@ RUN apt-get update && apt-get install -y \
 # Set working directory
 WORKDIR /app
 
+# Set environment variables early
+ENV NODE_ENV=production
+ENV STRAPI_TELEMETRY_DISABLED=true
+ENV DEBIAN_FRONTEND=noninteractive
+
 # Copy package files for caching
 COPY package*.json ./
 
-# Clear npm cache and install dependencies
-RUN npm cache clean --force \
-    && npm ci --only=production \
-    && npm rebuild --verbose
+# Install dependencies without postinstall to avoid double rebuild
+RUN npm ci --omit=dev --ignore-scripts \
+    && npm rebuild --silent
 
 # Copy source code
 COPY . .
-
-# Set environment variables
-ENV NODE_ENV=production
-ENV STRAPI_TELEMETRY_DISABLED=true
-
-# Remove node_modules and reinstall to ensure proper native bindings
-RUN rm -rf node_modules \
-    && npm ci --only=production \
-    && npm rebuild --verbose
 
 # Build the application
 RUN npm run build

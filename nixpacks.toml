@@ -1,0 +1,14 @@
+[providers]
+node = "18.20.8"
+
+[phases.setup]
+nixPkgs = ["nodejs", "npm", "python3", "gcc", "gnumake", "pkg-config"]
+
+[phases.install]
+cmd = "cd cdn && npm ci --omit=dev"
+
+[phases.build]
+cmd = "cd cdn && npm run build"
+
+[start]
+cmd = "cd cdn && npm start"
