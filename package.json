@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "npm run build --prefix cdn",
+    "build": "cd cdn && npm run build",
     "start": "npm run start --prefix cdn",
     "develop": "npm run develop --prefix cdn",
-    "postinstall": "cd cdn && npm install"
+    "postinstall": "cd cdn && npm install && npm rebuild"
   },
   "engines": {
     "node": ">=18.0.0 <=22.x.x",

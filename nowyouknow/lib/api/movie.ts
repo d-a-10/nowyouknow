@@ -24,7 +24,7 @@ const config = {
 const MovieApi: MovieApiType = {
   all: (page: number, limit: number = 10) =>
     axios.get(
-      `${SERVER_BASE_URL}/movies?populate=*&${getQuery(limit, page)}`,
+      `${SERVER_BASE_URL}/movies?populate=*&${getQuery({ limit, page })}`,
       config
     ),
 

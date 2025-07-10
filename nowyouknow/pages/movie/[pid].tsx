@@ -55,15 +55,15 @@ const Home: NextPage = () => {
             ) : (
                 <div dir='rtl' >
                     <Head>
-                        <title>{movie?.attributes.title} | NowYouKnow</title>
+                        <title>{movie?.title} | NowYouKnow</title>
                         <link rel="icon" href="/favicon.ico" />
                         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                        <meta name="description" content={movie?.attributes.summary} />
+                        <meta name="description" content={movie?.summary} />
                         <meta name="theme-color" content="#0f172a" />
                         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
                         <meta name="twitter:card" content="summary_large_image" />
-                        <meta name="og:title" content={movie?.attributes.title + " | NowYouKnow"} />
-                        <meta name="og:description" content={movie?.attributes.summary} />
+                        <meta name="og:title" content={movie?.title + " | NowYouKnow"} />
+                        <meta name="og:description" content={movie?.summary} />
                         <meta name="og:whatsapp" content="whatsapp://send?text=Check%20out%20Arcane%2C%20a%20fantasy%20novel%20of%20magic%20and%20intrigue%3A%20https%3A%2F%2Fexample.com%2Farcane" />
                         <meta name="og:telegram" content="https://t.me/share/url?url=https%3A%2F%2Fexample.com%2Farcane&text=Check%20out%20Arcane%2C%20a%20fantasy%20novel%20of%20magic%20and%20intrigue" />
                         <meta property="og:image:width" content="600" />
@@ -75,9 +75,9 @@ const Home: NextPage = () => {
                     {movie &&
                         <ParallaxBackground
                             imgUrl={"https://assets.voxcinemas.com/posters/P_HO00011185.jpg"}
-                            title={movie.attributes.title}
-                            ageRating1={movie.attributes.rating}
-                            ageRating2={String(movie.attributes.year)}
+                            title={movie.title}
+                            ageRating1={movie.rating}
+                            ageRating2={String(movie.year)}
                         />
                     }
 
@@ -94,15 +94,15 @@ const Home: NextPage = () => {
                             </div>
 
                             {/* add duration text  */}
-                            <p className=' text-slate-500 text-xs'>المدة الزمنية :{movie?.attributes.duration}</p>
+                            <p className=' text-slate-500 text-xs'>المدة الزمنية :{movie?.duration}</p>
 
                             {/* add progress and tooltip  */}
                             <div className=' grid grid-cols-2 gap-2 mt-4'>
                                 {movie &&
                                     <>
-                                        <IndicatorScore name="مواضيع غير مناسبة" percentage={GetPercentage(movie?.attributes.inappropriate_rating)} tooltipText="مواضيع ومشاهد غير مناسبة وغير لائقة للأطفال" />
-                                        <IndicatorScore name="ألفاظ غير لائقة" percentage={GetPercentage(movie?.attributes.language_rating)} tooltipText="ألفاظ غير لائقة" />
-                                        <IndicatorScore name="مشاهد عنيفة" percentage={GetPercentage(movie?.attributes.violence_rating)} tooltipText="سفك الدماء, قتل " />
+                                        <IndicatorScore name="مواضيع غير مناسبة" percentage={GetPercentage(movie?.inappropriate_rating)} tooltipText="مواضيع ومشاهد غير مناسبة وغير لائقة للأطفال" />
+                                        <IndicatorScore name="ألفاظ غير لائقة" percentage={GetPercentage(movie?.language_rating)} tooltipText="ألفاظ غير لائقة" />
+                                        <IndicatorScore name="مشاهد عنيفة" percentage={GetPercentage(movie?.violence_rating)} tooltipText="سفك الدماء, قتل " />
                                         <IndicatorScore name="الإجمالي" percentage={GetPercentage(CalculateOverall(movie))} tooltipText="النسبة الإجمالية للمؤشرات السابقة" />
                                     </>
                                 }
@@ -121,7 +121,7 @@ const Home: NextPage = () => {
                                 >
                                     {movie &&
                                         <ReactMarkdown>
-                                            {movie?.attributes.summary}
+                                            {movie?.summary}
                                         </ReactMarkdown>
                                     }
 
@@ -139,7 +139,7 @@ const Home: NextPage = () => {
                                 >
                                     {movie &&
                                         <ReactMarkdown>
-                                            {movie?.attributes.inappropriate}
+                                            {movie?.inappropriate}
                                         </ReactMarkdown>
                                     }
                                 </IndicatorContent>
@@ -156,7 +156,7 @@ const Home: NextPage = () => {
                                 >
                                     {movie &&
                                         <ReactMarkdown>
-                                            {movie?.attributes.language}
+                                            {movie?.language}
                                         </ReactMarkdown>
                                     }
                                 </IndicatorContent>
@@ -174,7 +174,7 @@ const Home: NextPage = () => {
 
                                     {movie &&
                                         <ReactMarkdown>
-                                            {movie?.attributes.violence}
+                                            {movie?.violence}
                                         </ReactMarkdown>
                                     }
                                 </IndicatorContent>
@@ -191,7 +191,7 @@ const Home: NextPage = () => {
                                 >
                                     {movie &&
                                         <ReactMarkdown>
-                                            {movie?.attributes.drug_usage}
+                                            {movie?.drug_usage}
                                         </ReactMarkdown>
                                     }
                                 </IndicatorContent>
@@ -208,7 +208,7 @@ const Home: NextPage = () => {
 
                                     {movie &&
                                         <ReactMarkdown>
-                                            {movie?.attributes.religious_imagery}
+                                            {movie?.religious_imagery}
                                         </ReactMarkdown>
                                     }
                                 </IndicatorContent>
