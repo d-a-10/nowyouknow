@@ -70,7 +70,23 @@ node -e "console.log(require('crypto').randomBytes(16).toString('base64'))"
 
 ## Troubleshooting
 
-- Check Railway logs for build/runtime errors
-- Ensure all environment variables are set
-- Verify DATABASE_URL is automatically set by Railway
-- Make sure port 1337 is exposed and Railway PORT env is handled
+### Common Issues:
+
+1. **SWC Native Binding Error**: 
+   - Fixed by switching to Ubuntu base image and rebuilding native modules
+   - Dockerfile now handles this automatically
+
+2. **Build Failures**:
+   - Check Railway logs for build/runtime errors
+   - Ensure all environment variables are set
+   - Verify DATABASE_URL is automatically set by Railway
+
+3. **Port Issues**:
+   - Make sure port 1337 is exposed and Railway PORT env is handled
+   - Railway automatically sets PORT environment variable
+
+### Build Process:
+- Uses Ubuntu base image for better native binding support
+- Rebuilds node_modules twice to ensure proper native bindings
+- Cleans npm cache before installation
+- Uses `--clean` flag for Strapi build

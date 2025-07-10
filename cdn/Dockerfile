@@ -1,15 +1,14 @@
-# Use Node.js 18 LTS for Railway compatibility
-FROM node:18-alpine
+# Use Node.js 18 LTS on Ubuntu for better compatibility with native bindings
+FROM node:18-bullseye-slim
 
-# Install system dependencies for node-gyp
-RUN apk add --no-cache \
+# Install system dependencies including curl for healthcheck
+RUN apt-get update && apt-get install -y \
     python3 \
     make \
     g++ \
-    cairo-dev \
-    jpeg-dev \
-    pango-dev \
-    giflib-dev
+    curl \
+    libc6-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 # Set working directory
 WORKDIR /app
@@ -17,8 +16,10 @@ WORKDIR /app
 # Copy package files for caching
 COPY package*.json ./
 
-# Install dependencies with legacy peer deps flag
-RUN npm ci --legacy-peer-deps --only=production
+# Clear npm cache and install dependencies
+RUN npm cache clean --force \
+    && npm ci --only=production \
+    && npm rebuild --verbose
 
 # Copy source code
 COPY . .
@@ -26,6 +27,11 @@ COPY . .
 # Set environment variables
 ENV NODE_ENV=production
 ENV STRAPI_TELEMETRY_DISABLED=true
+
+# Remove node_modules and reinstall to ensure proper native bindings
+RUN rm -rf node_modules \
+    && npm ci --only=production \
+    && npm rebuild --verbose
 
 # Build the application
 RUN npm run build

@@ -6,8 +6,9 @@
   "scripts": {
     "develop": "strapi develop",
     "start": "strapi start",
-    "build": "strapi build",
-    "strapi": "strapi"
+    "build": "NODE_ENV=production strapi build --clean",
+    "strapi": "strapi",
+    "postinstall": "npm rebuild --verbose"
   },
   "dependencies": {
     "@strapi/strapi": "^5.18.0",
