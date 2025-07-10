@@ -1,11 +1,12 @@
 {
-  "name": "nowyouknow-monorepo",
+  "name": "nowyouknow-backend",
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "cd cdn && npm ci && npm run build",
-    "start": "cd cdn && npm start",
-    "develop": "cd cdn && npm run develop"
+    "build": "npm run build --prefix cdn",
+    "start": "npm run start --prefix cdn",
+    "develop": "npm run develop --prefix cdn",
+    "postinstall": "cd cdn && npm install"
   },
   "engines": {
     "node": ">=18.0.0 <=22.x.x",
