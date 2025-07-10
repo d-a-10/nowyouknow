@@ -73,8 +73,10 @@ node -e "console.log(require('crypto').randomBytes(16).toString('base64'))"
 ### Common Issues:
 
 1. **SWC Native Binding Error**: 
-   - Fixed by switching to Ubuntu base image and rebuilding native modules
-   - Dockerfile now handles this automatically
+   - **FIXED**: Removed Docker completely, using only Nixpacks
+   - Added postinstall script to rebuild @swc/core
+   - Added .nvmrc files for Node version consistency
+   - Clean node_modules approach ensures proper native bindings
 
 2. **Build Failures**:
    - Check Railway logs for build/runtime errors
@@ -85,8 +87,14 @@ node -e "console.log(require('crypto').randomBytes(16).toString('base64'))"
    - Make sure port 1337 is exposed and Railway PORT env is handled
    - Railway automatically sets PORT environment variable
 
+### SWC Fix Implementation:
+- ✅ Nixpacks builder (no Docker)
+- ✅ Node.js 18.20.8 consistency (.nvmrc files)
+- ✅ Postinstall script: `npm rebuild @swc/core`
+- ✅ Clean node_modules on deployment
+- ✅ Proper native binding compilation
+
 ### Build Process:
-- Uses Ubuntu base image for better native binding support
-- Rebuilds node_modules twice to ensure proper native bindings
-- Cleans npm cache before installation
-- Uses `--clean` flag for Strapi build
+- Uses Nixpacks for optimal Node.js native binding support
+- Rebuilds @swc/core during postinstall
+- Consistent Node.js version across all environments
